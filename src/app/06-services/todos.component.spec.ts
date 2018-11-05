@@ -63,4 +63,28 @@ describe('TodosComponent', () => {
 
     expect(component.message).toBe(errMsg);
   });
+
+
+  /* test for func delete() */
+
+  it('should call func to delete item in the server if user confirms', () => {
+    spyOn(window, 'confirm').and.returnValue(true);
+
+    const spyFunc = spyOn(service, 'delete').and.returnValue(from([]));
+
+    component.delete(1);
+
+    expect(spyFunc).toHaveBeenCalledWith(1);
+  });
+
+  it('should NOT call func to delete item in the server if user does NOT confirm', () => {
+    spyOn(window, 'confirm').and.returnValue(false);
+
+    const spyFunc = spyOn(service, 'delete').and.returnValue(from([]));
+
+    component.delete(1);
+
+    expect(spyFunc).not.toHaveBeenCalled();
+  });
+
 });
