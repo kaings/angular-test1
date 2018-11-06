@@ -4,13 +4,15 @@ import {HttpClientModule} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import {VoterComponent} from './1-voter/voter.component';
+import {TodosComponent} from './2-todos/todos.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    VoterComponent
+    VoterComponent,
+    TodosComponent
   ],
   imports: [
     BrowserModule,
