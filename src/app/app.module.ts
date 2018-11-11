@@ -8,6 +8,7 @@ import {TodosComponent} from './2-todos/todos.component';
 import {UserDetailsComponent} from './3-user-details/user-details.component';
 import {HomeComponent} from './home/home.component';
 import {UsersComponent} from './users/users.component';
+import {AppRoutes} from './app.routes';
 
 
 
@@ -22,7 +23,8 @@ import {UsersComponent} from './users/users.component';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutes
   ],
   providers: [],
   bootstrap: [AppComponent]
