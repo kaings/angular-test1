@@ -60,6 +60,10 @@ describe('UserDetailsComponent', () => {
     const spyFunc = spyOn(router, 'navigate');
 
     const activatedRoute: ActivatedRouteStub = TestBed.get(ActivatedRoute);
+    // const activatedRoute: ActivatedRouteStub = fixture.debugElement.injector.get(ActivatedRoute);
+    /* ^ this will cause an error. The injector as example above will actually inject ActivatedRoute instead of
+     * useClass ActivatedRouteStub. Usually this injector is used to inject some service into a component */
+
     activatedRoute.pass({id: 0});
 
     expect(spyFunc).toHaveBeenCalledWith(['not-found']);
