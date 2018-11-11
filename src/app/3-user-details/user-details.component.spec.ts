@@ -5,14 +5,24 @@ import { DebugElement } from '@angular/core';
 
 import { UserDetailsComponent } from './user-details.component';
 import {ActivatedRoute, Router} from '@angular/router';
-import {from, Observable} from 'rxjs';
+import {from, Observable, Subject} from 'rxjs';
 
 class RouterStub {
   navigate(param: any[]) {}
 }
 
 class ActivatedRouteStub {
-  params: Observable<any> = from([]);
+  // params: Observable<any> = from([]);
+
+  private subject = new Subject();
+
+  pass(value: any) {
+    this.subject.next(value);
+  }
+
+  get params(): Observable<any> {
+    return this.subject.asObservable();
+  }
 }
 
 describe('UserDetailsComponent', () => {
@@ -43,5 +53,15 @@ describe('UserDetailsComponent', () => {
     component.save();
 
     expect(spyFunc).toHaveBeenCalledWith(['users']);
+  });
+
+  it('should navigate user to not-found page when invalid user id is passed', () => {
+    const router = TestBed.get(Router);
+    const spyFunc = spyOn(router, 'navigate');
+
+    const activatedRoute: ActivatedRouteStub = TestBed.get(ActivatedRoute);
+    activatedRoute.pass({id: 0});
+
+    expect(spyFunc).toHaveBeenCalledWith(['not-found']);
   });
 });
